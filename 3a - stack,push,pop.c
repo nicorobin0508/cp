@@ -1,79 +1,75 @@
 #include <stdio.h>
-#include <conio.h>
-#include<stdlib.h>
+#include <stdlib.h>
 #define SIZE 4
 
-int top = 0, stk[SIZE];
+int top = -1; 
+int stk[SIZE];
+
 void push();
 void pop();
 void show();
 
-
-int main()
-{
+int main() {
     int choice;
-    // clrscr();
-    while(1){
+
+    while (1) {
         printf("\n1. Push\n2. Pop\n3. Display\n4. Exit\n");
-        printf("\n\nEnter the choice: ");
+        printf("\nEnter your choice: ");
         scanf("%d", &choice);
-        switch(choice){
+
+        switch (choice) {
             case 1:
                 push();
                 break;
-           
+
             case 2:
                 pop();
                 break;
-           
+
             case 3:
                 show();
                 break;
 
             case 4:
                 exit(0);
-           
+
             default:
-                printf("\n\nInvalid choice!!\n\n");
+                printf("\nInvalid choice!!\n");
         }
     }
+
+    return 0;
 }
 
-
-void push(){
+void push() {
     int x;
-    if(top == SIZE){
-        printf("OVERFLOW!!!");
-    }
-   
-    else{
-        printf("\nEnter the element to be added to the stack: ");
+    if (top == SIZE - 1) {
+        printf("Stack Overflow! Cannot push more elements.\n");
+    } else {
+        printf("Enter the element to be pushed onto the stack: ");
         scanf("%d", &x);
-        top+=1;
+        top += 1;
         stk[top] = x;
+        printf("Element %d pushed onto the stack.\n", x);
     }
 }
 
-
-void pop(){
-    if(top == 0){
-        printf("\nUNDERFLOW!!!");
-    }
-    else{
-        printf("\nPopped element: %d", stk[top]);
-        top-=1;
+void pop() {
+    if (top == -1) {
+        printf("Stack Underflow! The stack is empty.\n");
+    } else {
+        printf("Popped element: %d\n", stk[top]);
+        top -= 1;
     }
 }
 
-
-void show(){
+void show() {
     int i;
-    if(top == 0){
-        printf("\nUNDERFLOW!!!");
-    }
-    else{
-        printf("\nElements present in the stack: \n");
-        for(i = top; i > 0; i--){
+    if (top == -1) {
+        printf("Stack is empty.\n");
+    } else {
+        printf("Elements present in the stack:\n");
+        for (i = top; i >= 0; i--) {
             printf("%d\n", stk[i]);
         }
     }
